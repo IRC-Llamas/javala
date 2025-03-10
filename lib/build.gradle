@@ -44,4 +44,15 @@ tasks.named('test') {
 }
 generateGrammarSource {
     arguments += ['-visitor', '-no-listener']
+    arguments += ["-package", "chat.llamas.javala.antlr"]
+}
+sourceSets {
+    main {
+        java {
+            srcDirs += 'build/generated-src/antlr/main'
+        }
+    }
+}
+tasks.named('compileJava') {
+    dependsOn tasks.named('generateGrammarSource')
 }
